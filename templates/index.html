@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO-app</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Task Manager</h1>
+</header>
+<hr>
+
+<div class = "form-container">
+    <form id = "add" action="/add" method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="text" name="deadline" placeholder="Deadline (YYYY-MM-DD HH:MM:SS)">
+        <button type="submit">Add</button>
+        <div class = 'refresh'>
+            <a href = '/check'>⟳</a>
+        </div>
+
+    </form>
+</div>
+
+<div class = 'page'>
+<aside>
+    <h2 style = "font-size: 50px; margin-left: 20px; margin-bottom: 10px">Show tasks:</h2>
+        <div class = 'sort-elements'>
+<!--            <form action = /sort/pending method="GET">-->
+<!--                <button type = "submit">Pending</button><br>-->
+<!--            </form>-->
+<!--            <button type = "submit">Before Deadline</button><br>-->
+
+                <a href = "/"><button type="button">Show All</button></a>
+                <a href = "/sort?filter=pending"><button type="button">Pending</button></a>
+                <a href = "/sort?filter=deadline"><button type="button">Before Deadline</button></a>
+        </div>
+</aside>
+<main>
+
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Edited</th>
+        <th>Deadline</th>
+        <th>Actions</th>
+    </tr>
+    {% for task in tasks %}
+    <tr class = "{% if task[3] == 'Done' %}marked-done{% endif %}">
+        {% if task[0] == edit_id %}
+            <form action = "/edit/{{ task[0] }}" method="POST">
+                <td><input class = 'edit' type = "text" name = "title" value = "{{ task[1] }}" required></td>
+                <td><input class = 'edit' type = "text" name = "description" value = "{{ task[2] }}" required></td>
+                <td>{{ task[3] }}</td>
+                <td>{{ task[4] }}</td>
+                <td>{{ task[5] }}</td>
+                <td><input class = 'edit' type = "text" name = "deadline" value = "{{ task[6] }}" required></td>
+                <td>
+                    <div class = "Edit-buttons">
+                        <button class = 'save' type = "submit">💾</button>
+                        <a href = "/">❌</a>
+                    </div>
+                </td>
+            </form>
+
+        {% else %}
+            <td>{{ task[1] }}</td>
+            <td>{{ task[2] }}</td>
+            <td>{{ task[3] }}</td>
+            <td>{{ task[4] }}</td>
+            <td>{{ task[5] }}</td>
+            <td>{{ task[6] }}</td>
+            <td>
+                <div class = "Edit-buttons">
+                    <a href="/done/{{ task[0] }}">✅</a>
+                    <a href="/delete/{{ task[0] }}">❌</a>
+                    <a href="/edit/{{ task[0] }}">✏️</a>
+                </div>
+            </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</main>
+</div>
+</body>
+</html>

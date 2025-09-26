@@ -1,0 +1,157 @@
+table, th, td{
+    border: 2px solid;
+}
+
+table {
+    padding: 3px;
+    width: 90%;
+    border-style: inset;
+    border-width: 4px;
+    margin: 0 auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+}
+th, td{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+td{
+    text-align: left;
+    overflow: auto; /* Dodaj scroll jeśli zawartość jest za duża */
+    font-size: 24px;
+}
+tr{
+    height: 100px;
+}
+/*tr:nth-child(even){*/
+/*    background-color: #A5D6D9;*/
+
+/*}*/
+tr:hover{
+    background-color: #A5D6D9;
+}
+th {
+    height: 60px;
+    font-size: 24px;
+    font-family: "Comic Sans MS", serif;
+    background-color: goldenrod;
+}
+
+h1{
+    text-align: center;
+    /*margin-left: 50px;*/
+    font-family: "Comic Sans MS", serif;
+    font-size: 40px;
+}
+
+header {
+    background-color: goldenrod;
+    padding: 30px;
+    border: solid 1px;
+}
+
+.form-container {
+    display: flex;/* aktywuje tryb "Flexbox" (Flexible Box Layout) dla danego elementu. */
+    justify-content: center; /* centruje w poziomie wszystkie elementy forma */
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    gap: 10px; /* dostep miedzy guzikiem a polami */
+    align-items: center;
+
+}
+
+form input[type="text"], form button {
+    padding: 10px;
+
+    font-size: 18px;
+
+    border-radius: 5px;
+
+    border: 1px solid #ccc;
+}
+
+form button:hover{
+    background-color: #3A7734;
+    font-weight: bold;
+}
+
+.Edit-buttons{
+    text-align: center;
+}
+
+.refresh {
+    font-size: 50px;
+}
+
+
+.marked-done {
+    color: #777;
+    background-color: #f0f0f0;
+    font-style: italic;
+    text-decoration: line-through;
+
+}
+
+.Edit-confirm {
+    font-size: 100%;
+    text-align: center;
+}
+
+.edit {
+    font-size: 100%;
+}
+
+
+.save {
+    background: none;
+    border: none;
+    font-size: inherit;
+}
+
+.sort-elements button{
+    font-size: 18px;
+    padding: 35px 50px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+aside {
+    width: 220px;
+    padding: 20px;
+}
+
+.form-container, table {
+    margin-left: 20px;
+}
+.page{
+    display: flex;
+    align-items: flex-start;
+}
+
+header {
+    width: 100%;
+    background-color: goldenrod;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    font-size: 36px;
+}
+
+
+main {
+    flex: 1;
+    padding: 20px;
+}
