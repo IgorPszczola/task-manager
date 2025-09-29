@@ -75,6 +75,8 @@ def sort_by_done():
     else:
         tasks = fetch_all_tasks()
 
+
+
     return render_template("index.html", tasks = tasks)
 
 

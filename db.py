@@ -178,6 +178,10 @@ def list_not_done():
     try:
         cursor.execute("SELECT * FROM Todo WHERE Status = 'Pending' OR Status = 'Pending(Late)'")
         data = cursor.fetchall()
+        if data:
+            return data
+        else:
+            return []
         # print_rows(data)
     except sqlite3.Error as error:
         print('Failed to list not done tasks, error: ', error)
@@ -261,7 +265,7 @@ def tasks_before_deadline():
         if data:
             return data
         else:
-            return None
+            return []
     except sqlite3.Error as error:
         print('Failed to fetch tasks, error: ', error)
         return []
