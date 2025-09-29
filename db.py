@@ -63,45 +63,6 @@ def mark_done(id):
             conn.close()
 
 
-# def list_all_tasks(order_by = None):
-#     try:
-#         if not order_by:
-#             data = cursor.execute("SELECT * FROM Todo")
-#             print_rows(data)
-#         elif order_by == "Title":
-#             data = cursor.execute("SELECT * FROM Todo ORDER BY Title")
-#             print_rows(data)
-#         elif order_by == "Description":
-#             data = cursor.execute("SELECT * FROM Todo ORDER BY Description")
-#             print_rows(data)
-#         elif order_by == "Created_at":
-#             data = cursor.execute("SELECT * FROM Todo ORDER BY Created_at")
-#             print_rows(data)
-#         elif order_by == "Deadline":
-#             data = cursor.execute("SELECT * FROM Todo ORDER BY Deadline")
-#             print_rows(data)
-#
-#         conn.commit()
-#
-#     except sqlite3.Error as error:
-#         print('Failed to list all tasks, error: ', error)
-
-
-# def print_deadline_of_task(id):
-#     try:
-#         data = cursor.execute("SELECT Deadline FROM Todo WHERE Id = ?" , (id,))
-#         date = data.fetchone()
-#         date = datetime.strptime(date[0], '%Y-%m-%d %H:%M:%S')
-#         task = cursor.execute("SELECT Title FROM Todo WHERE Id = ?", (id,))
-#         task = task.fetchone()
-#         # fetchone -> returns tuple
-#         # fetchall -> returns dictionary
-#         print(f"Task '{task[0]}' has a deadline of {date}")
-#         conn.commit()
-#     except sqlite3.Error as error:
-#         print('Failed to print deadline of task, error: ', error)
-
-
 def delete_task(id):
     conn = get_conn()
     cursor = conn.cursor()
@@ -154,24 +115,6 @@ def check_is_correct_id(id):
             conn.close()
 
 
-
-# def print_rows(data):
-#     for row in data.fetchall():
-#         if row[3] == 'Pending':
-#             color = Fore.YELLOW
-#         elif row[3] == 'Pending(Late)':
-#             color = Fore.RED
-#         else:
-#             color = Fore.GREEN
-#         print(f"ID = {row[0]}\n"
-#             f"Title = {row[1]}\n"
-#             f"Description = {row[2]}\n"
-#             f"Status = {color + row[3]}{Style.RESET_ALL}\n"
-#             f"Created_at = {row[4]}\n"
-#             f"Edited_at = {row[6]}\n"
-#             f"Deadline = {row[5]}\n")
-
-
 def list_not_done():
     conn = get_conn()
     cursor = conn.cursor()
@@ -182,7 +125,6 @@ def list_not_done():
             return data
         else:
             return []
-        # print_rows(data)
     except sqlite3.Error as error:
         print('Failed to list not done tasks, error: ', error)
         return []
@@ -219,10 +161,6 @@ def edit_task(edited_id, Title, Description, Deadline):
     conn = get_conn()
     cursor = conn.cursor()
     try:
-        # allowerd_columns = ["Title", "Description", "Status", "Deadline"]
-        # if edited_column not in allowerd_columns:
-        #     print("Incorrect column to edit")
-        #     return
 
         query = f"UPDATE Todo SET Title = ?, Description = ?, Deadline = ? WHERE ID = ?"
         cursor.execute(query, (Title, Description, Deadline, edited_id))
